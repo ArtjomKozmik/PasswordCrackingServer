@@ -21,12 +21,62 @@ import javax.jws.WebParam;
 @WebService(serviceName = "MasterWebService")
 public class MasterWebService {
 
-    ArrayList<String> words = new ArrayList<>();
-    ArrayList<ArrayList> arrayOfWords = new ArrayList<>();
+    static ArrayList<String> words = new ArrayList<>();
+    static ArrayList<List> arrayOfWords = new ArrayList<>();
 
     public MasterWebService() {
     }
 
+    private static void readFromFile() throws IOException {
+
+        FileReader fileReader = null;
+        try {
+            fileReader = new FileReader("webster-dictionary.txt");
+
+            final BufferedReader dictionary = new BufferedReader(fileReader);
+            while (true) {
+                final String dictionaryEntry = dictionary.readLine();
+
+                if (dictionaryEntry == null) {
+                    break;
+                }
+                words.add(dictionaryEntry);
+            }
+        } finally {
+            if (fileReader != null) {
+                fileReader.close();
+            }
+        }
+    }
+
+
+    private static void splitDictionary() {
+        int startPoint = 0;
+        int lastIndex = words.size();
+        int endPoint = 25000;
+        int jump = endPoint;
+        int numberOfSplits = 0;
+        double size = words.size();
+        double splitSize = endPoint;
+        if (lastIndex % endPoint > endPoint / 2) {
+            numberOfSplits = lastIndex / endPoint;
+        } else {
+            numberOfSplits = lastIndex / endPoint + 1;
+        }
+
+        for (int i = 0; i < numberOfSplits; i++) {
+            arrayOfWords.add(words.subList(startPoint, endPoint));
+
+
+            startPoint = startPoint + jump;
+            endPoint = endPoint + jump;
+            if (endPoint > lastIndex) {
+                endPoint = lastIndex;
+
+            }
+
+        }
+    }
     /**
      * This is a sample web service operation
      */
@@ -41,34 +91,4 @@ public class MasterWebService {
 
     }
 
-    
-        private void splitDictionary()
-        {
-            FileReader fileReader = null;
-            boolean isFinished = false;
-        try {
-            try {
-                fileReader = new FileReader("webster-dictionary.txt");
-                final BufferedReader dictionary = new BufferedReader(fileReader);
-                while (isFinished == true) {
-                    final String dictionaryEntry = dictionary.readLine();
-                    for (int i = 0; i < 12; i++) {
-                        for (int y = 0; i < 9999; i++) {
-                            words.add(dictionaryEntry);
-                            if (dictionaryEntry == null) {
-                                isFinished = true;
-                                break;
-                            }
-                            arrayOfWords.add(words);
-                        }
-                    }
-                }
-            } finally {
-                if (fileReader != null) {
-                    fileReader.close();
-                }
-            }
-        } catch (IOException ex) {//empty};
-        }
-    }
 }
