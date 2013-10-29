@@ -1,0 +1,9 @@
+Red 
+Blue
+Black
+Yellow
+Green
+White
+Purple
+Orange
+ABCF
