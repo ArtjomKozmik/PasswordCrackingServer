@@ -6,17 +6,11 @@
       <xsd:import namespace="http://master/" schemaLocation="MasterWebService_schema1.xsd"/>
     </xsd:schema>
   </types>
-  <message name="splitDictionary">
-    <part name="parameters" element="tns:splitDictionary"/>
+  <message name="printWords">
+    <part name="parameters" element="tns:printWords"/>
   </message>
-  <message name="splitDictionaryResponse">
-    <part name="parameters" element="tns:splitDictionaryResponse"/>
-  </message>
-  <message name="FileNotFoundException">
-    <part name="fault" element="tns:FileNotFoundException"/>
-  </message>
-  <message name="IOException">
-    <part name="fault" element="tns:IOException"/>
+  <message name="printWordsResponse">
+    <part name="parameters" element="tns:printWordsResponse"/>
   </message>
   <message name="hello">
     <part name="parameters" element="tns:hello"/>
@@ -24,23 +18,45 @@
   <message name="helloResponse">
     <part name="parameters" element="tns:helloResponse"/>
   </message>
+  <message name="getPasswords">
+    <part name="parameters" element="tns:getPasswords"/>
+  </message>
+  <message name="getPasswordsResponse">
+    <part name="parameters" element="tns:getPasswordsResponse"/>
+  </message>
+  <message name="getWords">
+    <part name="parameters" element="tns:getWords"/>
+  </message>
+  <message name="getWordsResponse">
+    <part name="parameters" element="tns:getWordsResponse"/>
+  </message>
+  <message name="sendResult2">
+    <part name="parameters" element="tns:sendResult2"/>
+  </message>
   <portType name="MasterWebService">
-    <operation name="splitDictionary">
-      <input wsam:Action="http://master/MasterWebService/splitDictionaryRequest" message="tns:splitDictionary"/>
-      <output wsam:Action="http://master/MasterWebService/splitDictionaryResponse" message="tns:splitDictionaryResponse"/>
-      <fault message="tns:FileNotFoundException" name="FileNotFoundException" wsam:Action="http://master/MasterWebService/splitDictionary/Fault/FileNotFoundException"/>
-      <fault message="tns:IOException" name="IOException" wsam:Action="http://master/MasterWebService/splitDictionary/Fault/IOException"/>
+    <operation name="printWords">
+      <input wsam:Action="http://master/MasterWebService/printWordsRequest" message="tns:printWords"/>
+      <output wsam:Action="http://master/MasterWebService/printWordsResponse" message="tns:printWordsResponse"/>
     </operation>
     <operation name="hello">
       <input wsam:Action="http://master/MasterWebService/helloRequest" message="tns:hello"/>
       <output wsam:Action="http://master/MasterWebService/helloResponse" message="tns:helloResponse"/>
-      <fault message="tns:FileNotFoundException" name="FileNotFoundException" wsam:Action="http://master/MasterWebService/hello/Fault/FileNotFoundException"/>
-      <fault message="tns:IOException" name="IOException" wsam:Action="http://master/MasterWebService/hello/Fault/IOException"/>
+    </operation>
+    <operation name="getPasswords">
+      <input wsam:Action="http://master/MasterWebService/getPasswordsRequest" message="tns:getPasswords"/>
+      <output wsam:Action="http://master/MasterWebService/getPasswordsResponse" message="tns:getPasswordsResponse"/>
+    </operation>
+    <operation name="getWords">
+      <input wsam:Action="http://master/MasterWebService/getWordsRequest" message="tns:getWords"/>
+      <output wsam:Action="http://master/MasterWebService/getWordsResponse" message="tns:getWordsResponse"/>
+    </operation>
+    <operation name="sendResult2">
+      <input wsam:Action="http://master/MasterWebService/sendResult2" message="tns:sendResult2"/>
     </operation>
   </portType>
   <binding name="MasterWebServicePortBinding" type="tns:MasterWebService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-    <operation name="splitDictionary">
+    <operation name="printWords">
       <soap:operation soapAction=""/>
       <input>
         <soap:body use="literal"/>
@@ -48,12 +64,6 @@
       <output>
         <soap:body use="literal"/>
       </output>
-      <fault name="FileNotFoundException">
-        <soap:fault name="FileNotFoundException" use="literal"/>
-      </fault>
-      <fault name="IOException">
-        <soap:fault name="IOException" use="literal"/>
-      </fault>
     </operation>
     <operation name="hello">
       <soap:operation soapAction=""/>
@@ -63,12 +73,30 @@
       <output>
         <soap:body use="literal"/>
       </output>
-      <fault name="FileNotFoundException">
-        <soap:fault name="FileNotFoundException" use="literal"/>
-      </fault>
-      <fault name="IOException">
-        <soap:fault name="IOException" use="literal"/>
-      </fault>
+    </operation>
+    <operation name="getPasswords">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="getWords">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="sendResult2">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
     </operation>
   </binding>
   <service name="MasterWebService">
